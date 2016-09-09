@@ -112,13 +112,15 @@ Before you start being a stats wizard...get organized.
 - If you save a file from R, it will save in your working directory (ditto)
 - Be careful, sometimes you think you are in the correct wd, but you are not. Double check using:
   
-```{r, eval=FALSE}
+
+```r
 getwd()
 ```
 
 You can change the working directory using 
 
-```{r, eval=FALSE}
+
+```r
 setwd("Desktop/ExperimentalMethods/RTutorials")
 ```
 
@@ -131,7 +133,8 @@ setwd("Desktop/ExperimentalMethods/RTutorials")
 - Andy Field will reference the ones he uses in the textbook
 
 
-```{r eval=FALSE}
+
+```r
 install.packages("package-name")
 library(package-name)
 ```
@@ -141,7 +144,8 @@ library(package-name)
 - The first one uses quotes, the second doesn't. Don't ask me why.
 - Often you figure out you don't have a package by getting an error.
 - Check to see what packages you have installed using
-```{r eval=FALSE}
+
+```r
 library()
 ```
 - You only have to **install** the package once, but you need to **load** the package every time you set up a new environment.
@@ -150,13 +154,23 @@ library()
 
 ## Some basic examples
 
-```{r}
+
+```r
 1+1
 ```
 
-```{r}
+```
+## [1] 2
+```
+
+
+```r
 a = 4
 a
+```
+
+```
+## [1] 4
 ```
 
 
