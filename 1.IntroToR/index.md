@@ -174,30 +174,190 @@ a
 ```
 
 
+```r
+fruit <- c("apples", "pears", "strawberries")
+```
+
+
 ---
 
 ## Data
 
+There are several ways to import data into your R environment:
+
+
+```r
+# Built into R
+read.csv()
+read.delim()
+read.table()
+
+# rio package
+library(rio)
 import()
-using data from package
+
+# Base datasets (often used in examples)
+library(datasets)
+mtcars
+```
 
 ---
 
-## Viewing , summarizing, ec
+## Viewing , summarizing, etc
 
---- 
 
-## Basic math
+```r
+mtcars
+View(mtcars)
+head(mtcars)
+```
+
+
+```r
+mtcars[1,]
+mtcars[,1]
+mtcars$mpg # beacause mtcars is a dataframe!
+```
 
 ---
 
-## Simple graph
+### What is a dataframe?
 
-(can mention ggplot coming soon)
+Sort of like a spreadsheet in Excel, except more fun.
+- header contains column names
+- note, most functions like to work with dataframes, but others like matrices
+- Similar, but different object type
+- can generally coerce using
+
+```r
+as.data.frame()
+as.matrix()
+```
 
 ---
 
-## Saving/workflow
+### DIY Dataframe
+
+Note, I rarely do this. Likely you will be pulling data from another source.
+
+
+```r
+metallicaNames <- c("Lars", "James", "Kirk", "Rob")
+metallicaAges <- c(47, 47, 48, 46)
+metallica_data <- data.frame(Name = metallicaNames, Age = metallicaAges)
+```
+
+```r
+metallica_data$Age
+```
+
+```
+## [1] 47 47 48 46
+```
+
+```r
+mean(metallica_data$Age)
+```
+
+```
+## [1] 47
+```
+
+---
+
+### Subsetting data
+
+
+```r
+metallica_data$Age >= 47
+```
+
+```
+## [1]  TRUE  TRUE  TRUE FALSE
+```
+
+```r
+older_band_members <- metallica_data[metallica_data$Age >= 47,]
+
+# OR use subset (a bit more intuitive)
+older_band_members <- subset(metallica_data, Age >= 47)
+```
+
+---
+
+## R Commander
+
+- GUI interface
+- If you are an SPSS user, it may feel more familiar
+- I don't like it (it used to crash my computer)
+
+---
+
+## Saving
+
+If you did some data manipulation and would like to save it as a new file:
+
+```r
+write.table()
+write.csv(metallica_data, "MetallicaData.csv") # note it will save in your wd
+```
+
+Save the R file, **DON'T** save the R workspace
+
+Can also make a `project` - helpful for saving the working directory, dataframes, etc.
+
+---
+
+## Brief introduction to graphs and `ggplot2`
+
+
+```r
+hist(mtcars$mpg)
+```
+
+![plot of chunk unnamed-chunk-16](assets/fig/unnamed-chunk-16-1.png)
+
+---
+
+
+```r
+plot(mtcars$mpg, mtcars$disp)
+```
+
+![plot of chunk unnamed-chunk-17](assets/fig/unnamed-chunk-17-1.png)
+
+---
+
+
+```r
+install.packages("ggplot2")
+```
+
+
+```r
+library(ggplot2)
+```
+
+
+
+```r
+plot <- ggplot(data = mtcars, aes(mpg, disp))
+plot + geom_point()
+```
+
+![plot of chunk unnamed-chunk-20](assets/fig/unnamed-chunk-20-1.png)
+
+---
+
+```r
+plot + geom_point() + ggtitle("This is my awesome graph")
+```
+
+![plot of chunk unnamed-chunk-21](assets/fig/unnamed-chunk-21-1.png)
+
+Note that the `plot` object isn't updating unless it is reassigned
+
+Read Ch 4 for some more examples.
 
 ---
 
@@ -208,6 +368,8 @@ Wikipedia:
 
 A (very) short introduction to R: 
 [https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf](https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf)
+
+Field A, Miles J, Field Z. Discovering Statistics Using R. London: Sage; 2012.
 
 ---
 

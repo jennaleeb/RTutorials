@@ -212,31 +212,161 @@ a
 <pre><code>## [1] 4
 </code></pre>
 
+<pre><code class="r">fruit &lt;- c(&quot;apples&quot;, &quot;pears&quot;, &quot;strawberries&quot;)
+</code></pre>
+
 </section>
 <section class="slide " id="slide-14">
   <h2>Data</h2>
-  <p>import()
-using data from package</p>
+  <p>There are several ways to import data into your R environment:</p>
+
+<pre><code class="r"># Built into R
+read.csv()
+read.delim()
+read.table()
+
+# rio package
+library(rio)
+import()
+
+# Base datasets (often used in examples)
+library(datasets)
+mtcars
+</code></pre>
 
 </section>
 <section class="slide " id="slide-15">
-  <h2>Viewing , summarizing, ec</h2>
-  
+  <h2>Viewing , summarizing, etc</h2>
+  <pre><code class="r">mtcars
+View(mtcars)
+head(mtcars)
+</code></pre>
+
+<pre><code class="r">mtcars[1,]
+mtcars[,1]
+mtcars$mpg # beacause mtcars is a dataframe!
+</code></pre>
+
 </section>
 <section class="slide " id="slide-16">
-  <h2>Basic math</h2>
-  
+  <h3>What is a dataframe?</h3>
+  <p>Sort of like a spreadsheet in Excel, except more fun.</p>
+
+<ul>
+<li>header contains column names</li>
+<li>note, most functions like to work with dataframes, but others like matrices</li>
+<li>Similar, but different object type</li>
+<li>can generally coerce using</li>
+</ul>
+
+<pre><code class="r">as.data.frame()
+as.matrix()
+</code></pre>
+
 </section>
 <section class="slide " id="slide-17">
-  <h2>Simple graph</h2>
-  <p>(can mention ggplot coming soon)</p>
+  <h3>DIY Dataframe</h3>
+  <p>Note, I rarely do this. Likely you will be pulling data from another source.</p>
+
+<pre><code class="r">metallicaNames &lt;- c(&quot;Lars&quot;, &quot;James&quot;, &quot;Kirk&quot;, &quot;Rob&quot;)
+metallicaAges &lt;- c(47, 47, 48, 46)
+metallica_data &lt;- data.frame(Name = metallicaNames, Age = metallicaAges)
+</code></pre>
+
+<pre><code class="r">metallica_data$Age
+</code></pre>
+
+<pre><code>## [1] 47 47 48 46
+</code></pre>
+
+<pre><code class="r">mean(metallica_data$Age)
+</code></pre>
+
+<pre><code>## [1] 47
+</code></pre>
 
 </section>
 <section class="slide " id="slide-18">
-  <h2>Saving/workflow</h2>
-  
+  <h3>Subsetting data</h3>
+  <pre><code class="r">metallica_data$Age &gt;= 47
+</code></pre>
+
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE
+</code></pre>
+
+<pre><code class="r">older_band_members &lt;- metallica_data[metallica_data$Age &gt;= 47,]
+
+# OR use subset (a bit more intuitive)
+older_band_members &lt;- subset(metallica_data, Age &gt;= 47)
+</code></pre>
+
 </section>
 <section class="slide " id="slide-19">
+  <h2>R Commander</h2>
+  <ul>
+<li>GUI interface</li>
+<li>If you are an SPSS user, it may feel more familiar</li>
+<li>I don&#39;t like it (it used to crash my computer)</li>
+</ul>
+
+</section>
+<section class="slide " id="slide-20">
+  <h2>Saving</h2>
+  <p>If you did some data manipulation and would like to save it as a new file:</p>
+
+<pre><code class="r">write.table()
+write.csv(metallica_data, &quot;MetallicaData.csv&quot;) # note it will save in your wd
+</code></pre>
+
+<p>Save the R file, <strong>DON&#39;T</strong> save the R workspace</p>
+
+<p>Can also make a <code>project</code> - helpful for saving the working directory, dataframes, etc.</p>
+
+</section>
+<section class="slide " id="slide-21">
+  <h2>Brief introduction to graphs and <code>ggplot2</code></h2>
+  <pre><code class="r">hist(mtcars$mpg)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16"></p>
+
+</section>
+<section class="slide " id="slide-22">
+  
+  <pre><code class="r">plot(mtcars$mpg, mtcars$disp)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-17-1.png" alt="plot of chunk unnamed-chunk-17"></p>
+
+</section>
+<section class="slide " id="slide-23">
+  
+  <pre><code class="r">install.packages(&quot;ggplot2&quot;)
+</code></pre>
+
+<pre><code class="r">library(ggplot2)
+</code></pre>
+
+<pre><code class="r">plot &lt;- ggplot(data = mtcars, aes(mpg, disp))
+plot + geom_point()
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-20-1.png" alt="plot of chunk unnamed-chunk-20"></p>
+
+</section>
+<section class="slide " id="slide-24">
+  
+  <pre><code class="r">plot + geom_point() + ggtitle(&quot;This is my awesome graph&quot;)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-21-1.png" alt="plot of chunk unnamed-chunk-21"></p>
+
+<p>Note that the <code>plot</code> object isn&#39;t updating unless it is reassigned</p>
+
+<p>Read Ch 4 for some more examples.</p>
+
+</section>
+<section class="slide " id="slide-25">
   <h2>References</h2>
   <p>Wikipedia:
 <a href="https://en.wikipedia.org/wiki/R_(programming_language">https://en.wikipedia.org/wiki/R_(programming_language)</a>)</p>
@@ -244,8 +374,10 @@ using data from package</p>
 <p>A (very) short introduction to R: 
 <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf">https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf</a></p>
 
+<p>Field A, Miles J, Field Z. Discovering Statistics Using R. London: Sage; 2012.</p>
+
 </section>
-<section class="slide " id="slide-20">
+<section class="slide " id="slide-26">
   
   
 </section>
