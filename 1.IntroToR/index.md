@@ -338,6 +338,10 @@ install.packages("ggplot2")
 library(ggplot2)
 ```
 
+```
+## Warning: package 'ggplot2' was built under R version 3.2.4
+```
+
 
 
 ```r
@@ -360,7 +364,32 @@ Note that the `plot` object isn't updating unless it is reassigned
 Read Ch 4 for some more examples.
 
 ---
+## R Markdown
 
+- instead of C+P-ing everything
+- Write your report, generate results, insert graphs, etc. all in the same file
+- A few hours of learning will save LOTS of time
+- Turn your analyses into:
+  + PDF
+  + Word
+  + Slides
+  + HTML (like me!)
+  + Interactive dashboard
+- File --> New --> R Markdown (.Rmd file)
+- To generate PDF files, you'll need LaTeX
+  + Mac: http://www.tug.org/mactex/
+  + Windows: http://miktex.org/
+- We will go into syntax, etc in a future tutorial
+
+---
+
+## More resources
+
+- Datacamp: datacamp.com/courses/free-introduction-to-r
+- R Markdown: http://rmarkdown.rstudio.com/lesson-1.html
+- The textbook is great
+
+---
 ## References
 
 Wikipedia:
